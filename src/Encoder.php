@@ -7,9 +7,10 @@ namespace Aegis\JSON;
 
 use Aegis\JSON\Exception\InvalidArgumentException;
 use Aegis\JSON\Exception\RecursionException;
+use Aegis\JSON\JsonSerializable;
 use Iterator;
 use IteratorAggregate;
-use JsonSerializable;
+use JsonSerializable as NativeJsonSerializable;
 use ReflectionClass;
 
 /**
@@ -63,7 +64,7 @@ class Encoder
     {
         $encoder = new static($cycleCheck, $options);
 
-        if ($value instanceof JsonSerializable) {
+        if ($value instanceof NativeJsonSerializable || $value instanceof JsonSerializable) {
             $value = $value->jsonSerialize();
         }
 
