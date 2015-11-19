@@ -5,8 +5,6 @@
 
 namespace Aegis\JSON;
 
-use SimpleXMLElement;
-use Aegis\JSON\Exception\RecursionException;
 use Aegis\JSON\Exception\RuntimeException;
 
 /**

@@ -5,9 +5,9 @@
 
 namespace Aegis\JSON;
 
-use stdClass;
 use Aegis\JSON\Exception\InvalidArgumentException;
 use Aegis\JSON\Exception\RuntimeException;
+use stdClass;
 
 /**
  * Decode JSON encoded string to PHP variable constructs

@@ -15,11 +15,11 @@
     "homepage": "https://github.com/aegis-security/json",
     "autoload": {
         "psr-4": {
-            "Aegis\\Json\\": "src/"
+            "Aegis\\JSON\\": "src/"
         }
     },
     "require": {
-        "php": ">=5.3.23",
+        "php": ">=5.3.23"
     },
     "minimum-stability": "dev",
     "prefer-stable": false,

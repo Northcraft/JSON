@@ -5,12 +5,12 @@
 
 namespace Aegis\JSON;
 
+use Aegis\JSON\Exception\InvalidArgumentException;
+use Aegis\JSON\Exception\RecursionException;
 use Iterator;
 use IteratorAggregate;
 use JsonSerializable;
 use ReflectionClass;
-use Aegis\JSON\Exception\InvalidArgumentException;
-use Aegis\JSON\Exception\RecursionException;
 
 /**
  * Encode PHP constructs to JSON
