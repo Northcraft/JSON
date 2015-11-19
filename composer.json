@@ -1,0 +1,31 @@
+{
+    "name": "aegis/json",
+    "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aegis",
+            "role": "Security Agent"
+        }
+    ],
+    "keywords": [
+        "aegis",
+        "json"
+    ],
+    "homepage": "https://github.com/aegis-security/json",
+    "autoload": {
+        "psr-4": {
+            "Aegis\\Json\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.23",
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
