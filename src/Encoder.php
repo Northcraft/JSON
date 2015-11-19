@@ -115,7 +115,9 @@ class Encoder
         }
 
         if ($value instanceof \JsonSerializable || $value instanceof JsonSerializable) {
-            return $this->_encodeValue($value->jsonSerialize());
+            $value = $value->jsonSerialize();
+
+            return $this->_encodeValue($value);
         } else {
             $props = '';
 
