@@ -5,6 +5,6 @@
 
 namespace Aegis\JSON\Exception;
 
-class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
+class BadMethodCallException extends \BadMethodCallException implements Exception
 {
 }

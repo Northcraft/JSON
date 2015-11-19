@@ -5,6 +5,6 @@
 
 namespace Aegis\JSON\Exception;
 
-class RuntimeException extends \RuntimeException implements ExceptionInterface
+class RuntimeException extends \RuntimeException implements Exception
 {
 }

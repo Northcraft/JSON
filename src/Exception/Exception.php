@@ -5,6 +5,6 @@
 
 namespace Aegis\JSON\Exception;
 
-interface ExceptionInterface
+interface Exception
 {
 }
