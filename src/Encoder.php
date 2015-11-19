@@ -64,10 +64,6 @@ class Encoder
     {
         $encoder = new static($cycleCheck, $options);
 
-        if ($value instanceof NativeJsonSerializable || $value instanceof JsonSerializable) {
-            $value = $value->jsonSerialize();
-        }
-
         return $encoder->_encodeValue($value);
     }
 
@@ -122,11 +118,13 @@ class Encoder
             $this->visited[] = $value;
         }
 
-        $props = '';
-
-        if (method_exists($value, 'toJson')) {
+        if ($value instanceof NativeJsonSerializable || $value instanceof JsonSerializable) {
+            return $this->_encodeValue($value->jsonSerialize());
+        } elseif (method_exists($value, 'toJson')) {
             $props = ',' . preg_replace("/^\{(.*)\}$/", "\\1", $value->toJson());
         } else {
+            $props = '';
+
             if ($value instanceof IteratorAggregate) {
                 $propCollection = $value->getIterator();
             } elseif ($value instanceof Iterator) {
@@ -146,6 +144,7 @@ class Encoder
         }
 
         $className = get_class($value);
+
         return '{"__className":'
             . $this->_encodeString($className)
             . $props . '}';

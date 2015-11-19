@@ -85,7 +85,9 @@ class JSON
     public static function encode($valueToEncode, $cycleCheck = false, $options = array())
     {
         if (is_object($valueToEncode)) {
-            if (method_exists($valueToEncode, 'toJson')) {
+            if ($valueToEncode instanceof JsonSerializable) {
+                $valueToEncode = $valueToEncode->jsonSerialize();
+            } elseif (method_exists($valueToEncode, 'toJson')) {
                 return $valueToEncode->toJson();
             } elseif (method_exists($valueToEncode, 'toArray')) {
                 return static::encode($valueToEncode->toArray(), $cycleCheck, $options);
