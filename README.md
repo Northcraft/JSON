@@ -10,7 +10,7 @@ Package is available on [Packagist](http://packagist.org/packages/aegis/jwt),
 you can install it using [Composer](http://getcomposer.org).
 
 ```shell
-composer require aegis/json "dev-master"
+composer require aegis/json
 ```
 
 ### Dependencies
