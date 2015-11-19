@@ -84,14 +84,8 @@ class JSON
      */
     public static function encode($valueToEncode, $cycleCheck = false, $options = array())
     {
-        if (is_object($valueToEncode)) {
-            if ($valueToEncode instanceof JsonSerializable) {
-                $valueToEncode = $valueToEncode->jsonSerialize();
-            } elseif (method_exists($valueToEncode, 'toJson')) {
-                return $valueToEncode->toJson();
-            } elseif (method_exists($valueToEncode, 'toArray')) {
-                return static::encode($valueToEncode->toArray(), $cycleCheck, $options);
-            }
+        if (is_object($valueToEncode) && $valueToEncode instanceof JsonSerializable) {
+            $valueToEncode = $valueToEncode->jsonSerialize();
         }
 
         // Pre-encoding look for Aegis\JSON\Expr objects and replacing by tmp ids

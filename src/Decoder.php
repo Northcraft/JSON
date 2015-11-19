@@ -7,7 +7,6 @@ namespace Aegis\JSON;
 
 use Aegis\JSON\Exception\InvalidArgumentException;
 use Aegis\JSON\Exception\RuntimeException;
-use stdClass;
 
 /**
  * Decode JSON encoded string to PHP variable constructs
@@ -182,12 +181,12 @@ class Decoder
      *        - float
      *        - boolean
      *        - null
-     *      - stdClass
+     *      - \stdClass
      *      - array
      *         - array of one or more of the above types
      *
      * By default, decoded objects will be returned as associative arrays; to
-     * return a stdClass object instead, pass {@link Aegis\JSON\JSON::TYPE_OBJECT} to
+     * return a \stdClass object instead, pass {@link Aegis\JSON\JSON::TYPE_OBJECT} to
      * the $objectDecodeType parameter.
      *
      * @static
@@ -215,13 +214,16 @@ class Decoder
             case self::DATUM:
                 $result  = $this->tokenValue;
                 $this->_getNextToken();
+
                 return($result);
+
             case self::LBRACE:
+
                 return($this->_decodeObject());
+
             case self::LBRACKET:
+
                 return($this->_decodeArray());
-            default:
-                return;
         }
     }
 
@@ -233,11 +235,11 @@ class Decoder
      * a special attribute called __className which specifies a class
      * name that should wrap the data contained within the encoded source.
      *
-     * Decodes to either an array or stdClass object, based on the value of
+     * Decodes to either an array or \stdClass object, based on the value of
      * {@link $decodeType}. If invalid $decodeType present, returns as an
      * array.
      *
-     * @return array|stdClass
+     * @return array|\stdClass
      * @throws RuntimeException
      */
     protected function _decodeObject()
@@ -274,8 +276,8 @@ class Decoder
 
         switch ($this->decodeType) {
             case JSON::TYPE_OBJECT:
-                // Create new stdClass and populate with $members
-                $result = new stdClass();
+                // Create new \stdClass and populate with $members
+                $result = new \stdClass();
                 foreach ($members as $key => $value) {
                     if ($key === '') {
                         $key = '_empty_';

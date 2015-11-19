@@ -8,10 +8,6 @@ namespace Aegis\JSON;
 use Aegis\JSON\Exception\InvalidArgumentException;
 use Aegis\JSON\Exception\RecursionException;
 use Aegis\JSON\JsonSerializable;
-use Iterator;
-use IteratorAggregate;
-use JsonSerializable as NativeJsonSerializable;
-use ReflectionClass;
 
 /**
  * Encode PHP constructs to JSON
@@ -118,16 +114,14 @@ class Encoder
             $this->visited[] = $value;
         }
 
-        if ($value instanceof NativeJsonSerializable || $value instanceof JsonSerializable) {
+        if ($value instanceof \JsonSerializable || $value instanceof JsonSerializable) {
             return $this->_encodeValue($value->jsonSerialize());
-        } elseif (method_exists($value, 'toJson')) {
-            $props = ',' . preg_replace("/^\{(.*)\}$/", "\\1", $value->toJson());
         } else {
             $props = '';
 
-            if ($value instanceof IteratorAggregate) {
+            if ($value instanceof \IteratorAggregate) {
                 $propCollection = $value->getIterator();
-            } elseif ($value instanceof Iterator) {
+            } elseif ($value instanceof \Iterator) {
                 $propCollection = $value;
             } else {
                 $propCollection = get_object_vars($value);
@@ -257,13 +251,13 @@ class Encoder
     }
 
     /**
-     * Encode the constants associated with the ReflectionClass
+     * Encode the constants associated with the \ReflectionClass
      * parameter. The encoding format is based on the class2 format
      *
-     * @param ReflectionClass $cls
+     * @param \ReflectionClass $cls
      * @return string Encoded constant block in class2 format
      */
-    private static function _encodeConstants(ReflectionClass $cls)
+    private static function _encodeConstants(\ReflectionClass $cls)
     {
         $result    = "constants : {";
         $constants = $cls->getConstants();
@@ -281,14 +275,14 @@ class Encoder
     }
 
     /**
-     * Encode the public methods of the ReflectionClass in the
+     * Encode the public methods of the \ReflectionClass in the
      * class2 format
      *
-     * @param ReflectionClass $cls
+     * @param \ReflectionClass $cls
      * @return string Encoded method fragment
      *
      */
-    private static function _encodeMethods(ReflectionClass $cls)
+    private static function _encodeMethods(\ReflectionClass $cls)
     {
         $methods = $cls->getMethods();
         $result = 'methods:{';
@@ -343,14 +337,14 @@ class Encoder
     }
 
     /**
-     * Encode the public properties of the ReflectionClass in the class2
+     * Encode the public properties of the \ReflectionClass in the class2
      * format.
      *
-     * @param ReflectionClass $cls
+     * @param \ReflectionClass $cls
      * @return string Encode properties list
      *
      */
-    private static function _encodeVariables(ReflectionClass $cls)
+    private static function _encodeVariables(\ReflectionClass $cls)
     {
         $properties = $cls->getProperties();
         $propValues = get_class_vars($cls->getName());
